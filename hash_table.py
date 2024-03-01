@@ -6,27 +6,65 @@ class HashTable:
 
     def hash_function(self, key):
         # Metoda do obliczania indeksu w tablicy dla danego klucza
-        pass
+        index = hash(key) % self.size
+        return index
 
     def insert(self, key, value):
         # Metoda do dodawania pary klucz-wartość do tablicy haszującej
-        pass
+        index = self.hash_function(key)
+        checking_if_the_key_exists = self.contains(key)
+        if checking_if_the_key_exists is True:
+            for item in self.table[index]:
+                for item_key in item.keys():
+                    if key == item_key:
+                        item[key] = value
+        else:
+            self.table[index].append({key: value})
 
     def remove(self, key):
         # Metoda do usuwania pary klucz-wartość na podstawie klucza
-        pass
+        index = self.hash_function(key)
+        checking_if_the_key_exists = self.contains(key)
+        if checking_if_the_key_exists is True:
+            for item in self.table[index]:
+                for item_key in item.keys():
+                    if key == item_key:
+                        self.table[index].remove(item)
+                        break
+        else:
+            return None
 
     def search(self, key):
         # Metoda do wyszukiwania wartości na podstawie klucza
-        pass
+        index = self.hash_function(key)
+        checking_if_the_key_exists = self.contains(key)
+        if checking_if_the_key_exists is True:
+            for item in self.table[index]:
+                for item_key in item.keys():
+                    if key == item_key:
+                        return item[key]
+        else:
+            return None
 
     def contains(self, key):
         # Metoda do sprawdzania, czy klucz znajduje się w tablicy
-        pass
+        index = self.hash_function(key)
+        if len(self.table[index]) > 0:
+            for item in self.table[index]:
+                if key in item.keys():
+                    return True
+            else:
+                return False
+        else:
+            return False
 
     def count_elements(self):
         # Metoda do zwracania liczby elementów w tablicy
-        pass
+        pairs_number = 0
+        for list in self.table:
+            pairs_number += len(list)
+        return pairs_number
+
 
 # Przykład użycia (będzie wymagał implementacji metod)
 hash_table = HashTable(size = 10)
@@ -36,5 +74,4 @@ hash_table.remove("klucz1")
 print(hash_table.contains("klucz1"))
 print(hash_table.count_elements())
 
-hash_value = hash("przykładowy_tekst")
 

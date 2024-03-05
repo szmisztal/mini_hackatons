@@ -1,7 +1,7 @@
 import datetime
 import random
 
-class Queue:
+class PriorityQueue:
     def __init__(self):
         self.elements_list = []
 
@@ -26,7 +26,7 @@ class Queue:
         else:
             return "List is empty"
 
-    def get_one_item(self, index):
+    def show_one_item(self, index):
         try:
             check_list_is_empty = self.check_list_is_empty()
             if check_list_is_empty == False:
@@ -56,7 +56,7 @@ class Element:
         return f"Element_{self.id} with {self.priority}-priority, element appearance time = {self.appearance_time}"
 
 # for testing
-queue = Queue()
+queue = PriorityQueue()
 obj_1 = Element(len(queue.elements_list) + 1, random.randint(1, 10))
 queue.add_item(obj_1)
 obj_2 = Element(len(queue.elements_list) + 1, random.randint(1, 10))
@@ -69,8 +69,8 @@ obj_5 = Element(len(queue.elements_list) + 1, random.randint(1, 10))
 queue.add_item(obj_5)
 print(queue.elements_list)
 print(queue.count_items())
-print(queue.get_one_item(4))
-print(queue.get_one_item(10))
+print(queue.show_one_item(4))
+print(queue.show_one_item(10))
 print(queue.get_item_with_highest_priority_and_delete_it())
 print(queue.count_items())
 
